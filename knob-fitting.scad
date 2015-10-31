@@ -1,6 +1,20 @@
+// Units are in millimeters
+
+// Constants
+knobDiameter = 50.50; 
+wallWidth = 5; 
+knobHeight = 16.5;
+diffOffset = 1; 
+
+// Derived variables
+knobRadius = knobDiameter/2; 
+mountRadius = knobRadius + wallWidth;
+mountHeight = knobHeight + wallWidth; 
+
+
 difference() {
-    cylinder(h = 25, r1 = 28, r2 = 28, center = false, $fn = 360);
-    translate(v = [0, 0, -1]) {
-        cylinder(h = 21, r1 = 25.25, r2 = 25.25, center = false, $fn = 360);
+    cylinder(h = mountHeight, r1 = mountRadius, r2 = mountRadius, center = false, $fn = 360);
+    translate(v = [0, 0, -diffOffset]) {
+        cylinder(h = knobHeight + diffOffset, r1 = knobRadius, r2 = knobRadius, center = false, $fn = 360);
     }
 }
