@@ -1,1 +1,4 @@
 *.xls
+.DS_Store
+datasheets/
+manuals/
