@@ -57,7 +57,7 @@ difference() {
     translate(v = [0, 0, knobHeight/2]) {
         rotate([90, 0, 0]) {
             cylinder(h = knobRadius + wallWidth + diffOffset, r1 = screwRadius, r2 = screwRadius, center = false, $fn = 360);
-            cylinder(h = nutHeight + washerHeight + 1 + knobRadius, r1 = washerRadius, r2 = washerRadius, center = false, $fn = 360);
+            cylinder(h = nutHeight + 1 + knobRadius, r1 = nutWidth/2, r2 = nutWidth/2, center = false, $fn = 6);
         }
     }
     translate(v = [0, 0, knobHeight + wallWidth/2]) {
