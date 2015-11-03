@@ -2,7 +2,7 @@
 
 // Constants
 knobDiameter = 50.50; 
-wallWidth = 6; 
+wallWidth = 10; 
 knobHeight = 16.5;
 diffOffset = 1; 
 sightHoleInnerRad=15.5;
@@ -15,11 +15,22 @@ washerHeight=0.8;
 screwRadius=1.45; 
 servoLeverRadius=10.43;
 servoLeverHeight=6.0; 
+screwHeadRadius=3; 
+
+//servoLeverRadius=13.7/2;
+servoLeverHeight=6.0; 
+servoLeverHoleDist=2.82; 
+servoLeverFirstHoleDistFromCenter=8.00; 
+servoLeverWidthAtFirstHole=8.00;
+servoLeverWidthAt4thHole=5.4;
+servoLeverLength=19.4;
+
 
 // Derived variables
 knobRadius = knobDiameter/2; 
 mountRadius = knobRadius + wallWidth;
 mountHeight = knobHeight + wallWidth; 
+
 
 
 difference() {
@@ -57,10 +68,49 @@ difference() {
     translate(v = [0, 0, knobHeight/2]) {
         rotate([90, 0, 0]) {
             cylinder(h = knobRadius + wallWidth + diffOffset, r1 = screwRadius, r2 = screwRadius, center = false, $fn = 360);
-            cylinder(h = nutHeight + 1 + knobRadius, r1 = nutWidth/2, r2 = nutWidth/2, center = false, $fn = 6);
+            cylinder(h = nutHeight + knobRadius, r1 = nutWidth/2, r2 = nutWidth/2, center = false, $fn = 6);
         }
     }
-    translate(v = [0, 0, knobHeight + wallWidth/2]) {
-        cylinder(h = servoLeverHeight, r1 = servoLeverRadius, r2 = servoLeverRadius, center = false, $fn = 360);
+    
+    translate(v = [0, -knobRadius - 5, knobHeight/2]) {
+        rotate([90, 0, 0]) {
+            cylinder(h = knobRadius + wallWidth + diffOffset, r1 = screwHeadRadius, r2 = screwHeadRadius, center = false, $fn = 360);
+        }
+    }
+    
+    // This cuts out a hole for the servo lever
+    translate(v = [0, 0, knobHeight + wallWidth - servoLeverHeight]) {
+        union() {
+            rotate([0, 0, 45]) {
+                polyhedron(
+                    points = [[0, 5.1584, 0], [19.4, 1.9480, 0], [19.4, -1.9480, 0], [0, -5.1584, 0], [0, 5.1584, servoLeverHeight], [19.4, 1.9480, servoLeverHeight], [19.4, -1.9480, servoLeverHeight], [0, -5.1584, servoLeverHeight]], 
+                    faces = [ [3, 1, 0], [2, 1, 3], [1, 4, 0], [1, 5, 4], [4, 5, 7], [6, 7, 5], [7, 6, 3], [6, 2, 3], [0, 4, 3], [4, 7, 3], [5, 1, 2], [5, 2, 6]]
+                );
+            }
+            rotate([0, 0, 135]) {
+                polyhedron(
+                    points = [[0, 5.1584, 0], [19.4, 1.9480, 0], [19.4, -1.9480, 0], [0, -5.1584, 0], [0, 5.1584, servoLeverHeight], [19.4, 1.9480, servoLeverHeight], [19.4, -1.9480, servoLeverHeight], [0, -5.1584, servoLeverHeight]], 
+                    faces = [ [3, 1, 0], [2, 1, 3], [1, 4, 0], [1, 5, 4], [4, 5, 7], [6, 7, 5], [7, 6, 3], [6, 2, 3], [0, 4, 3], [4, 7, 3], [5, 1, 2], [5, 2, 6]]
+                );
+            }
+            rotate([0, 0, -45]) {
+                polyhedron(
+                    points = [[0, 5.1584, 0], [19.4, 1.9480, 0], [19.4, -1.9480, 0], [0, -5.1584, 0], [0, 5.1584, servoLeverHeight], [19.4, 1.9480, servoLeverHeight], [19.4, -1.9480, servoLeverHeight], [0, -5.1584, servoLeverHeight]], 
+                    faces = [ [3, 1, 0], [2, 1, 3], [1, 4, 0], [1, 5, 4], [4, 5, 7], [6, 7, 5], [7, 6, 3], [6, 2, 3], [0, 4, 3], [4, 7, 3], [5, 1, 2], [5, 2, 6]]
+                );
+            }
+            rotate([0, 0, -135]) {
+                polyhedron(
+                    points = [[0, 5.1584, 0], [19.4, 1.9480, 0], [19.4, -1.9480, 0], [0, -5.1584, 0], [0, 5.1584, servoLeverHeight], [19.4, 1.9480, servoLeverHeight], [19.4, -1.9480, servoLeverHeight], [0, -5.1584, servoLeverHeight]], 
+                    faces = [ [3, 1, 0], [2, 1, 3], [1, 4, 0], [1, 5, 4], [4, 5, 7], [6, 7, 5], [7, 6, 3], [6, 2, 3], [0, 4, 3], [4, 7, 3], [5, 1, 2], [5, 2, 6]]
+                );
+            }
+        }
+    }
+    
+    // This cuts out some margin for the servo lever center 
+    translate(v = [0, 0, knobHeight + wallWidth - servoLeverHeight - 2]) {
+        cylinder(h = servoLeverHeight + 2, r1 = servoLeverFirstHoleDistFromCenter, r2 = servoLeverFirstHoleDistFromCenter, center = false, $fn = 360);
     }
 }
+
