@@ -21,10 +21,10 @@ screwHeadRadius=3;
 //servoLeverRadius=13.7/2;
 servoLeverHeight=6.0; 
 servoLeverHoleDist=2.82; 
-servoLeverFirstHoleDistFromCenter=8.00; 
-servoLeverWidthAtFirstHole=4.00;
-servoLeverWidthAt4thHole=2.6;
-servoLeverLength=19.4;
+servoLeverFirstHoleDistFromCenter=6.75; 
+servoLeverWidthAtFirstHole=4.25;
+servoLeverWidthAt4thHole=3;
+servoLeverLength=20;
 
 // Derived variables
 knobRadius = knobDiameter/2; 
