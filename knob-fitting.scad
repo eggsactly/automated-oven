@@ -13,7 +13,7 @@ nutWidth=5.5;
 nutHeight=2.3;
 washerRadius=4.4;
 washerHeight=0.8;
-screwRadius=1.45; 
+screwRadius=2; 
 servoLeverRadius=10.43;
 servoLeverHeight=6.0; 
 screwHeadRadius=3; 
@@ -31,6 +31,7 @@ servoLeverLength=19.4;
 knobRadius = knobDiameter/2; 
 mountRadius = knobRadius + wallWidth;
 mountHeight = knobHeight + wallWidth; 
+nutWidthPrime = 1.1547 * nutWidth; 
 
 
 
@@ -69,7 +70,7 @@ difference() {
     translate(v = [0, 0, knobHeight/2]) {
         rotate([90, 0, 0]) {
             cylinder(h = knobRadius + wallWidth + diffOffset, r1 = screwRadius, r2 = screwRadius, center = false, $fn = 360);
-            cylinder(h = nutHeight + knobRadius, r1 = nutWidth/2, r2 = nutWidth/2, center = false, $fn = 6);
+            cylinder(h = nutHeight + knobRadius, r1 = nutWidthPrime/2, r2 = nutWidthPrime/2, center = false, $fn = 6);
         }
     }
     
