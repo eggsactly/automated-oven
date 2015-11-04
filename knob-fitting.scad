@@ -22,10 +22,9 @@ screwHeadRadius=3;
 servoLeverHeight=6.0; 
 servoLeverHoleDist=2.82; 
 servoLeverFirstHoleDistFromCenter=8.00; 
-servoLeverWidthAtFirstHole=8.00;
-servoLeverWidthAt4thHole=5.4;
+servoLeverWidthAtFirstHole=4.00;
+servoLeverWidthAt4thHole=2.6;
 servoLeverLength=19.4;
-
 
 // Derived variables
 knobRadius = knobDiameter/2; 
@@ -33,7 +32,9 @@ mountRadius = knobRadius + wallWidth;
 mountHeight = knobHeight + wallWidth; 
 nutWidthPrime = 1.1547 * nutWidth; 
 
-
+m = (servoLeverWidthAt4thHole - servoLeverWidthAtFirstHole) / (3 * servoLeverHoleDist); 
+b = servoLeverWidthAtFirstHole - (m * servoLeverFirstHoleDistFromCenter); 
+yMax = (m * servoLeverLength) + b; 
 
 difference() {
     //This is the main cylinder 
@@ -83,29 +84,13 @@ difference() {
     // This cuts out a hole for the servo lever
     translate(v = [0, 0, knobHeight + wallWidth - servoLeverHeight]) {
         union() {
-            rotate([0, 0, 45]) {
-                polyhedron(
-                    points = [[0, 5.1584, 0], [19.4, 1.9480, 0], [19.4, -1.9480, 0], [0, -5.1584, 0], [0, 5.1584, servoLeverHeight], [19.4, 1.9480, servoLeverHeight], [19.4, -1.9480, servoLeverHeight], [0, -5.1584, servoLeverHeight]], 
-                    faces = [ [3, 1, 0], [2, 1, 3], [1, 4, 0], [1, 5, 4], [4, 5, 7], [6, 7, 5], [7, 6, 3], [6, 2, 3], [0, 4, 3], [4, 7, 3], [5, 1, 2], [5, 2, 6]]
-                );
-            }
-            rotate([0, 0, 135]) {
-                polyhedron(
-                    points = [[0, 5.1584, 0], [19.4, 1.9480, 0], [19.4, -1.9480, 0], [0, -5.1584, 0], [0, 5.1584, servoLeverHeight], [19.4, 1.9480, servoLeverHeight], [19.4, -1.9480, servoLeverHeight], [0, -5.1584, servoLeverHeight]], 
-                    faces = [ [3, 1, 0], [2, 1, 3], [1, 4, 0], [1, 5, 4], [4, 5, 7], [6, 7, 5], [7, 6, 3], [6, 2, 3], [0, 4, 3], [4, 7, 3], [5, 1, 2], [5, 2, 6]]
-                );
-            }
-            rotate([0, 0, -45]) {
-                polyhedron(
-                    points = [[0, 5.1584, 0], [19.4, 1.9480, 0], [19.4, -1.9480, 0], [0, -5.1584, 0], [0, 5.1584, servoLeverHeight], [19.4, 1.9480, servoLeverHeight], [19.4, -1.9480, servoLeverHeight], [0, -5.1584, servoLeverHeight]], 
-                    faces = [ [3, 1, 0], [2, 1, 3], [1, 4, 0], [1, 5, 4], [4, 5, 7], [6, 7, 5], [7, 6, 3], [6, 2, 3], [0, 4, 3], [4, 7, 3], [5, 1, 2], [5, 2, 6]]
-                );
-            }
-            rotate([0, 0, -135]) {
-                polyhedron(
-                    points = [[0, 5.1584, 0], [19.4, 1.9480, 0], [19.4, -1.9480, 0], [0, -5.1584, 0], [0, 5.1584, servoLeverHeight], [19.4, 1.9480, servoLeverHeight], [19.4, -1.9480, servoLeverHeight], [0, -5.1584, servoLeverHeight]], 
-                    faces = [ [3, 1, 0], [2, 1, 3], [1, 4, 0], [1, 5, 4], [4, 5, 7], [6, 7, 5], [7, 6, 3], [6, 2, 3], [0, 4, 3], [4, 7, 3], [5, 1, 2], [5, 2, 6]]
-                );
+            for(a=[0:3]){
+                rotate([0, 0, 45 + (90 * a)]) {
+                    polyhedron(
+                        points = [[0, b, 0], [servoLeverLength, yMax, 0], [servoLeverLength, -yMax, 0], [0, -b, 0], [0, b, servoLeverHeight], [servoLeverLength, yMax, servoLeverHeight], [servoLeverLength, -yMax, servoLeverHeight], [0, -b, servoLeverHeight]], 
+                        faces = [ [3, 1, 0], [2, 1, 3], [1, 4, 0], [1, 5, 4], [4, 5, 7], [6, 7, 5], [7, 6, 3], [6, 2, 3], [0, 4, 3], [4, 7, 3], [5, 1, 2], [5, 2, 6]]
+                    );
+                }
             }
         }
     }
