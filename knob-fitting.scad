@@ -1,13 +1,14 @@
 // Units are in millimeters
 
 // Constants
-knobDiameter = 50.50; 
-wallWidth = 10; 
+knobDiameter = 51.50; 
+wallWidth = 9; 
 knobHeight = 16.5;
 diffOffset = 1; 
 sightHoleInnerRad=15.5;
-sightHoleOuterRad=21.0;
-bridgeWidth=10;
+sightHoleOuterRad=23.0;
+sightHoleOuterRadTop=30.0;
+bridgeWidth=11;
 nutWidth=5.5; 
 nutHeight=2.3;
 washerRadius=4.4;
@@ -48,17 +49,17 @@ difference() {
     translate(v = [0, 0, knobHeight]) {
         difference() {
             translate(v = [0, 0, -diffOffset/2]) {
-                cylinder(h = wallWidth + diffOffset, r1 = sightHoleOuterRad, r2 = sightHoleOuterRad, center = false, $fn = 360);
+                cylinder(h = wallWidth + diffOffset, r1 = sightHoleOuterRad, r2 = sightHoleOuterRadTop, center = false, $fn = 360);
             }
             translate(v = [0, 0, -diffOffset]) {
                 cylinder(h = wallWidth + 2 *diffOffset, r1 = sightHoleInnerRad, r2 = sightHoleInnerRad, center = false, $fn = 360);
             }
             rotate([0, 0, 45]) {
-                translate(v = [-sightHoleOuterRad, -bridgeWidth/2, -3*diffOffset/2]) {
-                    cube([2*sightHoleOuterRad, bridgeWidth, wallWidth + 3*diffOffset], center=false);
+                translate(v = [-sightHoleOuterRadTop, -bridgeWidth/2, -3*diffOffset/2]) {
+                    cube([2*sightHoleOuterRadTop, bridgeWidth, wallWidth + 3*diffOffset], center=false);
                 }
-                translate(v = [-bridgeWidth/2, -sightHoleOuterRad, -3*diffOffset/2]) {
-                    cube([bridgeWidth, 2*sightHoleOuterRad , wallWidth + 3*diffOffset], center=false);
+                translate(v = [-bridgeWidth/2, -sightHoleOuterRadTop, -3*diffOffset/2]) {
+                    cube([bridgeWidth, 2*sightHoleOuterRadTop , wallWidth + 3*diffOffset], center=false);
                 }
             }
         }
