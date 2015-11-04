@@ -36,6 +36,7 @@ m = (servoLeverWidthAt4thHole - servoLeverWidthAtFirstHole) / (3 * servoLeverHol
 b = servoLeverWidthAtFirstHole - (m * servoLeverFirstHoleDistFromCenter); 
 yMax = (m * servoLeverLength) + b; 
 
+
 difference() {
     //This is the main cylinder 
     cylinder(h = mountHeight, r1 = mountRadius, r2 = mountRadius, center = false, $fn = 360);
@@ -94,7 +95,15 @@ difference() {
             }
         }
     }
-    
+    for(a=[0:3]){
+        rotate([0, 0, 45 + (90 * a)]) {
+            translate(v = [knobRadius + wallWidth, 0, knobHeight + wallWidth]) {
+                rotate([0, -90, 0]) {
+                    cylinder(h = 5, r1 = 3, r2 = 0, center = false, $fn = 360);
+                }
+            }
+        }
+    }
     // This cuts out some margin for the servo lever center 
     translate(v = [0, 0, knobHeight + wallWidth - servoLeverHeight - 2]) {
         cylinder(h = servoLeverHeight + 2, r1 = servoLeverFirstHoleDistFromCenter, r2 = servoLeverFirstHoleDistFromCenter, center = false, $fn = 360);
