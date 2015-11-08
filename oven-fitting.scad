@@ -31,12 +31,11 @@ mountRadius = knobRadius + wallWidth + margin;
 
 wallThickness=10; 
 plateLength=93; 
-plateWidth=mountRadius + wallThickness;
+plateWidth=2*mountRadius + wallThickness;
 
 difference() {
     translate(v = [-plateWidth/2, -plateLength/2, 0]) {
         cube([plateWidth, plateLength, mountHeight + wallThickness], center=false);
     }
-    
-    
+    cylinder(h = mountHeight, r1 = mountRadius + margin, r2 = mountRadius + margin, center = false, $fn = 360);
 }
