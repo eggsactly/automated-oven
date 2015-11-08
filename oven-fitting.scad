@@ -24,6 +24,7 @@ servoLeverWidthAtFirstHole=4.25;
 servoLeverWidthAt4thHole=3;
 servoLeverLength=20;
 mountHeight = knobHeight + wallWidth; 
+bevelRadius = 5; 
 
 margin=2;
 knobRadius = knobDiameter/2; 
@@ -35,8 +36,12 @@ plateWidth=2*mountRadius + wallThickness;
 knobOffset=4.33;
 
 difference() {
-    translate(v = [-plateWidth/2, -plateLength/2, 0]) {
-        cube([plateWidth, plateLength, mountHeight + wallThickness + knobOffset], center=false);
+    translate(v = [-plateWidth/2 + bevelRadius/2, -plateLength/2 + bevelRadius/2, 0]) {
+        minkowski()
+        {
+            cube([plateWidth - bevelRadius, plateLength - bevelRadius, (mountHeight + wallThickness + knobOffset)/2], center=false);
+            cylinder(h = (mountHeight + wallThickness + knobOffset)/2, r1 = bevelRadius, r2 = bevelRadius, center = false, $fn = 360);
+        }
     }
     cylinder(h = mountHeight + knobOffset, r1 = mountRadius + margin, r2 = mountRadius + margin, center = false, $fn = 360);
 }
