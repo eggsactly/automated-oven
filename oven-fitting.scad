@@ -1,7 +1,7 @@
 include<variables.scad>
 
 difference() {
-    union(){      
+    union() {      
          // This is for the servo mount 
         translate(v = [-servoEdgeToCenter - ((servoMountWidth - servoLength)/2), -(servoWidth + wallThickness)/2, knobOffset + mountHeight]) {
             cube([servoMountWidth + wallThickness, servoWidth + wallThickness, servoHeight + wallThickness], center=false);
@@ -31,5 +31,15 @@ difference() {
     //This cuts off the top for the servo mount
     translate(v = [-servoEdgeToCenter - ((servoMountWidth - servoLength)/2), -(servoWidth + wallThickness)/2, knobOffset + mountHeight + servoHeight]) {
         cube([servoMountWidth + wallThickness, servoWidth + wallThickness, wallThickness], center=false);
+    }
+    
+    // This cube cuts out a place for the servo wire mount to slide up on
+    translate(v = [-servoEdgeToCenter, -servoWireMountWidth/2, knobOffset + mountHeight]) {
+        cube([((servoMountWidth - servoLength)/2), servoWireMountWidth, knobOffset + mountHeight + wallThickness], center=false);
+    }
+    
+    // This cuts out a space for the servo control wire to stick out 
+    translate(v = [-servoEdgeToCenter - (servoMountWidth - servoLength)/2, -servoWireMountWidth/2, knobOffset + mountHeight + servoHeight - servoBottomToServoWire]) {
+        cube([(servoMountWidth - servoLength)/2, servoWireMountWidth, servoBottomToServoWire], center=false);
     }
 }

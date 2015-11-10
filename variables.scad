@@ -43,3 +43,5 @@ servoMountWidth=54.3;
 servoMountDistFromTop=11.75; 
 servoEdgeToCenter = 15.3; 
 servoMountDistToBody=10.00;
+servoWireMountWidth=7.00;
+servoBottomToServoWire=7.10;
