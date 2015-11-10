@@ -58,4 +58,24 @@ difference() {
             }
         }
     }
+    
+    // Cut out holes for the sides 
+    translate(v = [bevelRadius - (1 * knobDiameter)/2, -plateLength/2 - wallThickness, (bevelRadius + 0.70 * (knobOffset + mountHeight))/2]) {
+        minkowski() {
+            cube([1 * knobDiameter - 2*bevelRadius, plateLength/2 + wallThickness, 0.65 * (knobOffset + mountHeight) - 2*bevelRadius], center=false);
+            rotate([-90, 0, 00]) {
+                cylinder(h = plateLength/2 + wallThickness, r1 = bevelRadius, r2 = bevelRadius, center = false, $fn = 360);
+            }
+        }
+    }
+    rotate([0, 0, 90]) {
+        translate(v = [bevelRadius - (1 * knobDiameter)/2, -plateLength/2 - wallThickness, (bevelRadius + 0.70 * (knobOffset + mountHeight))/2]) {
+            minkowski() {
+                cube([1 * knobDiameter - 2*bevelRadius, plateLength/2 + wallThickness, 0.65 * (knobOffset + mountHeight) - 2*bevelRadius], center=false);
+                rotate([-90, 0, 00]) {
+                    cylinder(h = plateLength/2 + wallThickness, r1 = bevelRadius, r2 = bevelRadius, center = false, $fn = 360);
+                }
+            }
+        }
+    }
 }
