@@ -1,5 +1,5 @@
 include<variables.scad>
-
+nutWidthPrime = 1.1547 * nutWidth; 
 difference() {
     union() {      
          // This is for the servo mount 
@@ -39,7 +39,19 @@ difference() {
     }
     
     // This cuts out a space for the servo control wire to stick out 
-    translate(v = [-servoEdgeToCenter - (servoMountWidth - servoLength)/2, -servoWireMountWidth/2, knobOffset + mountHeight + servoHeight - servoBottomToServoWire]) {
-        cube([(servoMountWidth - servoLength)/2, servoWireMountWidth, servoBottomToServoWire], center=false);
+    translate(v = [-servoEdgeToCenter - (servoMountWidth - servoLength)/2, -(servoWireMountWidth+3)/2, knobOffset + mountHeight + servoHeight - servoBottomToServoWire]) {
+        cube([(servoMountWidth - servoLength), servoWireMountWidth + 3, servoBottomToServoWire], center=false);
+    }
+    
+    // Cut out a space for the screws to use to mount the servo on 
+    for(a=[0:1]) {
+        for(b=[0:1]) {
+            translate(v = [-servoEdgeToCenter + wallThickness/2 - ((servoMountWidth - servoLength)/4) + (a * (servoMountWidth - ((servoMountWidth - servoLength)/2))), (b * servoMountHoleDist) - (servoMountHoleDist/2), 0]) {
+                cylinder(h =  knobOffset + mountHeight + 2 * wallThickness + servoHeight, r1 = screwRadius, r2 = screwRadius, center = false, $fn = 360);
+                translate(v = [0, 0, knobOffset + mountHeight + servoHeight - wallThickness - servoMountHexNutDistFromTop]) {
+                    cylinder(h = servoMountHexNutDistFromTop + wallThickness, r1 = nutWidthPrime/2, r2 = nutWidthPrime/2, center = false, $fn = 6);
+                }
+            }
+        }
     }
 }
