@@ -78,4 +78,16 @@ difference() {
             }
         }
     }
+    
+    // Cut out holes for M2 screws
+    for(a=[0:1]) {
+        for(b=[0:1]) {
+            translate(v = [(b * (plateWidth - 2*wallThickness)) - (plateWidth - 2*wallThickness)/2, (a * (plateLength - 2*wallThickness)) - (plateLength - 2*wallThickness)/2, 0]) {
+                translate(v = [0, 0, mountHeight + wallThickness + m2HeadHeight]) {
+                    cylinder(h = m2HeadHeight, r1 = m2HeadDiameter/2, r2 = m2HeadDiameter/2, center = false, $fn = 360);
+                }
+                cylinder(h = mountHeight + wallThickness + knobOffset, r1 = m2ThreadDiameter/2, r2 = m2ThreadDiameter/2, center = false, $fn = 360);
+            }
+        }
+    }
 }
