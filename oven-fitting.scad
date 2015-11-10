@@ -3,8 +3,12 @@ nutWidthPrime = 1.1547 * nutWidth;
 difference() {
     union() {      
          // This is for the servo mount 
-        translate(v = [-servoEdgeToCenter - ((servoMountWidth - servoLength)/2), -(servoWidth + wallThickness)/2, knobOffset + mountHeight]) {
-            cube([servoMountWidth + wallThickness, servoWidth + wallThickness, servoHeight + wallThickness], center=false);
+        translate(v = [bevelRadius - servoEdgeToCenter - ((servoMountWidth - servoLength)/2), bevelRadius- (servoWidth + wallThickness)/2, knobOffset + mountHeight]) {
+            minkowski()
+            {
+                cube([servoMountWidth + wallThickness - 2*bevelRadius, servoWidth + wallThickness - 2*bevelRadius, (servoHeight + wallThickness)/2], center=false);
+                cylinder(h = (servoHeight + wallThickness)/2, r1 = bevelRadius, r2 = bevelRadius, center = false, $fn = 360);
+            }
         }
         // This if for the part which fits over the knob
         translate(v = [-plateWidth/2 + bevelRadius/2, -plateLength/2 + bevelRadius/2, 0]) {
