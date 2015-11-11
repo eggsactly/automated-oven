@@ -69,6 +69,7 @@ difference() {
             }
         }
     }
+    // This cuts out a place to fit a credit card under to disloge 
     for(a=[0:3]){
         rotate([0, 0, 45 + (90 * a)]) {
             translate(v = [knobRadius + wallWidth, 0, knobHeight + wallWidth]) {
