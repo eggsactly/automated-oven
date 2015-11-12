@@ -30,8 +30,8 @@ union() {
         }
         
         //This cuts out a place for the servo below the part where we have the mounts 
-        translate(v = [-servoEdgeToCenter + wallThickness/2 - ((servoMountWidth - servoLength)/2), -(servoWidth)/2, 0]) {
-            cube([servoMountWidth, servoWidth, servoMountDistToBody + knobOffset + mountHeight], center=false);
+        translate(v = [-servoEdgeToCenter + wallThickness/2 - ((servoMountWidth - servoLength)/2), -(servoWidth)/2, mountHeight]) {
+            cube([servoMountWidth, servoWidth, servoMountDistToBody + knobOffset], center=false);
         }
         
         //This cuts off the top for the servo mount
@@ -53,7 +53,9 @@ union() {
         for(a=[0:1]) {
             for(b=[0:1]) {
                 translate(v = [-servoEdgeToCenter + wallThickness/2 - ((servoMountWidth - servoLength)/4) + (a * (servoMountWidth - ((servoMountWidth - servoLength)/2))), (b * servoMountHoleDist) - (servoMountHoleDist/2), 0]) {
-                    cylinder(h =  knobOffset + mountHeight + 2 * wallThickness + servoHeight, r1 = screwRadius, r2 = screwRadius, center = false, $fn = 360);
+                    translate(v = [0, 0, bevelRadius + 0.70 * (knobOffset + mountHeight)/2]) {
+                        cylinder(h =  knobOffset + mountHeight + 2 * wallThickness + servoHeight, r1 = screwRadius, r2 = screwRadius, center = false, $fn = 360);
+                    }
                     translate(v = [0, 0, knobOffset + mountHeight + servoHeight - wallThickness - servoMountHexNutDistFromTop]) {
                         cylinder(h = servoMountHexNutDistFromTop + wallThickness, r1 = nutWidthPrime/2, r2 = nutWidthPrime/2, center = false, $fn = 6);
                     }
@@ -88,7 +90,9 @@ union() {
                     translate(v = [0, 0, mountHeight + wallThickness + m2HeadHeight]) {
                         cylinder(h = m2HeadHeight, r1 = m2HeadDiameter/2, r2 = m2HeadDiameter/2, center = false, $fn = 360);
                     }
+                    
                     cylinder(h = mountHeight + wallThickness + knobOffset, r1 = m2ThreadDiameter/2, r2 = m2ThreadDiameter/2, center = false, $fn = 360);
+                    
                 }
             }
         }
