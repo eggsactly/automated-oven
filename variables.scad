@@ -48,6 +48,6 @@ servoBottomToServoWire=7.10;
 servoMountHoleDist=10.00; 
 servoMountHexNutDistFromTop=15.00;
 
-m2ThreadDiameter=2.30;
-m2HeadDiameter=4.00; 
-m2HeadHeight=2.50; 
+m2ThreadDiameter=3.00;
+m2HeadDiameter=6.00; 
+m2HeadHeight=3.00; 
