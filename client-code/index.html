@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>Oven Controller</title>
+        <!--Declare javascript source-->
+        
+    </head>
+    
+    <body>
+        <h1>Oven Controller</h1>
+        <form name="formA">
+            <p><input type="radio" name="status" value="1" checked>Off</p>
+            <p><input type="radio" name="status" value="2">Bake</p>
+            <p><input type="range" name="points" min="0" max="180"> Temperature</p>
+        </form>
+        
+        <pre>
+            <script type="text/javascript">
+                var status = 0;
+                var temp = 0;
+                var slider = document.forms["formA"].elements["points"];
+                var radios = document.forms["formA"].elements["status"];
+                for(radio in radios) {
+                    radios[radio].onclick = function() {
+                        status = this.value;
+                        writeToFile();
+                    }
+                }
+            
+                slider.onchange = function() {
+                    temp = slider.value;
+                    writeToFile();
+                }
+            
+                function writeToFile() {
+                    var data = new FormData();
+                    data.append("status", status.toString());
+                    data.append("temp", temp.toString());
+                    var xhr = new XMLHttpRequest();
+                    xhr.open('post', 'http://127.0.0.1/~gweaver/oven/', true );
+                    xhr.send(data);
+                }
+            </script>
+        </pre>
+    </body>
+</html>
