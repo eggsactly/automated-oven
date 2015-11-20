@@ -87,7 +87,7 @@ union() {
         for(a=[0:1]) {
             for(b=[0:1]) {
                 translate(v = [(b * (plateWidth - 2*wallThickness)) - (plateWidth - 2*wallThickness)/2, (a * (plateLength - 2*wallThickness)) - (plateLength - 2*wallThickness)/2, 0]) {
-                    translate(v = [0, 0, mountHeight + wallThickness + m2HeadHeight]) {
+                    translate(v = [0, 0, mountHeight + wallThickness - m2HeadHeight + knobOffset]) {
                         cylinder(h = m2HeadHeight, r1 = m2HeadDiameter/2, r2 = m2HeadDiameter/2, center = false, $fn = 360);
                     }
                     
@@ -96,33 +96,33 @@ union() {
                 }
             }
         }
-        
-        // This cuts out a place for the Bake, Off and Broil lables to show when their on 
-        translate(v = [0, 0, mountHeight + knobOffset - 1]) {
-            difference() { 
+        rotate([0, 0, 180]) {
+            // This cuts out a place for the Bake, Off and Broil lables to show when they're on 
+            translate(v = [0, 0, mountHeight + knobOffset - 1]) {
+                difference() { 
 
-                translate(v = [0, 0, 0]) {
-                    cylinder(h = wallThickness + 1, r1 = sightHoleOuterRadTop, r2 = mountRadius, center = false, $fn = 360);
-                }
-                    
-                
-                // This part is the 3/4ths of a pie to diff out the diff of the hole 
-                rotate([0, 0, 45]) {
-                    cube([plateLength, plateLength, servoHeight + wallThickness + mountHeight + knobOffset], center=false);
-                    translate(v = [0, -plateLength, 0]) {
-                        cube([plateLength, plateLength, servoHeight + wallThickness + mountHeight + knobOffset], center=false);
+                    translate(v = [0, 0, 0]) {
+                        cylinder(h = wallThickness + 1, r1 = sightHoleOuterRadTop, r2 = mountRadius, center = false, $fn = 360);
                     }
-                    translate(v = [-plateLength, 0, 0]) {
+                        
+                    
+                    // This part is the 3/4ths of a pie to diff out the diff of the hole 
+                    rotate([0, 0, 45]) {
                         cube([plateLength, plateLength, servoHeight + wallThickness + mountHeight + knobOffset], center=false);
+                        translate(v = [0, -plateLength, 0]) {
+                            cube([plateLength, plateLength, servoHeight + wallThickness + mountHeight + knobOffset], center=false);
+                        }
+                        translate(v = [-plateLength, 0, 0]) {
+                            cube([plateLength, plateLength, servoHeight + wallThickness + mountHeight + knobOffset], center=false);
+                        }
                     }
                 }
             }
-            
         }
     }
 
     translate(v = [0, 0, mountHeight + knobOffset]) {
-        translate(v = [-plateLength/2, -servoWidth/2 - wallThickness + bevelRadius, 0]) {
+        translate(v = [-plateLength/2, servoWidth/2 , 0]) {
             cube([plateLength, wallThickness/2, wallThickness], center=false);
         }
     }

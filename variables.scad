@@ -34,7 +34,7 @@ mountRadius = knobRadius + wallWidth + margin;
 wallThickness=10; 
 plateLength=93; 
 plateWidth=2.5*mountRadius + wallThickness;
-knobOffset=8;
+knobOffset=10;
 
 servoHeight=38;
 servoWidth=20.6;
