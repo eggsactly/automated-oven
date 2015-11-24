@@ -2,15 +2,16 @@
 //ARDUINO 1.0+ ONLY
 #include <Ethernet.h>
 #include <SPI.h>
+#include <Servo.h> 
 
 ////////////////////////////////////////////////////////////////////////
 //CONFIGURE
 ////////////////////////////////////////////////////////////////////////
-byte server[] = { 174,123,231,247 }; //ip Address of the server you will connect to
+byte server[] = { 98,172,84,203 }; //ip Address of the server you will connect to
 
 //The location to go to on the server
 //make sure to keep HTTP/1.0 at the end, this is telling it what type of file it is
-String location = "www.thepool.blue/oven.txt HTTP/1.0";
+String location = "/oven-get.php HTTP/1.0";
 
 
 // if need to change the MAC address (Very Rare)
@@ -19,6 +20,9 @@ byte mac[] = { 0x90, 0xA2, 0xDA, 0x10, 0x2A, 0xEF };
 
 EthernetClient client;
 
+Servo bakeServo;
+Servo tempServo; 
+
 char inString[32]; // string for incoming serial data
 int stringPos = 0; // string index counter
 boolean startRead = false; // is reading?
@@ -26,15 +30,42 @@ boolean startRead = false; // is reading?
 void setup(){
   Ethernet.begin(mac);
   Serial.begin(9600);
+  
+  bakeServo.attach(5);
+  tempServo.attach(6); 
 }
 
-void loop(){
-  String pageValue = connectAndRead(); //connect to the server and read the output
+unsigned servoAngle; 
 
-  Serial.println(pageValue); //print out the findings.
+void loop() {
+  String pageValue = connectAndRead(); //connect to the server and read the output
+  
+  // Decode the values
+
+  Serial.print("Bake Value: ");
+  Serial.println(pageValue.charAt(0));
+  
+  Serial.print("Temp Value: ");
+  Serial.println(pageValue.substring(2).toInt());
+
+  if(pageValue.length() > 2) {
+    if(pageValue.charAt(0) == '1') {
+      bakeServo.write(90);
+    }
+    else if(pageValue.charAt(0) == '2') {
+      bakeServo.write(170);
+    }
+    else if(pageValue.charAt(180) == '3') {
+      bakeServo.write(10);
+    }
+    
+    tempServo.write(pageValue.substring(2).toInt());
+  }
 
   delay(5000); //wait 5 seconds before connecting again
 }
+
+
 
 String connectAndRead(){
   //connect to the server
@@ -91,4 +122,3 @@ String readPage(){
   }
 
 }
-
