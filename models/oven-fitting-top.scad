@@ -1,3 +1,5 @@
+// Copyright (c) 2015 W.A. Garrett Weaver
+
 // This if for the part which fits over the knob
 difference() {
     include<oven-fitting.scad>

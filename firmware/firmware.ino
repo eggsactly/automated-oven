@@ -1,5 +1,5 @@
-//ARDUINO 1.0+ ONLY
-//ARDUINO 1.0+ ONLY
+// Copyright (c) 2015 W.A. Garrett Weaver
+
 #include <Ethernet.h>
 #include <SPI.h>
 #include <Servo.h> 

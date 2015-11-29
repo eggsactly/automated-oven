@@ -1,4 +1,6 @@
 <?php
+	// Copyright (c) 2015 W.A. Garrett Weaver
+
 	$file = 'oven.txt';
 	
 	if (file_exists($file)) {

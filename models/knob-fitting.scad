@@ -1,3 +1,5 @@
+// Copyright (c) 2015 W.A. Garrett Weaver
+
 include<variables.scad>
 
 // Derived variables

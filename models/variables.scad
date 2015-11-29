@@ -1,3 +1,5 @@
+// Copyright (c) 2015 W.A. Garrett Weaver
+
 // Units are in millimeters
 // Constants
 knobDiameter = 51.50; 
