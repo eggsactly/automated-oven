@@ -6,10 +6,11 @@
 
 #define LEFT_SERVO 5
 #define RIGHT_SERVO 6
-#define LED_PIN 9
+#define CONNECT_LED 9
+#define BAKE_LED 8
 
 #define OFF_ANGLE 45
-#define BAKE_ANGLE 135
+#define BAKE_ANGLE 120
 
 ////////////////////////////////////////////////////////////////////////
 //CONFIGURE
@@ -41,7 +42,13 @@ void setup(){
   
   bakeServo.attach(LEFT_SERVO);
   tempServo.attach(RIGHT_SERVO); 
-  pinMode(LED_PIN, OUTPUT);
+  
+  pinMode(CONNECT_LED, OUTPUT);
+  pinMode(BAKE_LED, OUTPUT);
+  
+  
+  digitalWrite(CONNECT_LED, LOW);
+  digitalWrite(BAKE_LED, LOW);
 }
 
 void loop() {
@@ -61,9 +68,11 @@ void loop() {
     // Control the left servo 
     if(pageValue.charAt(0) == '2') {
       bakeServo.write(BAKE_ANGLE);
+      digitalWrite(BAKE_LED, HIGH);
     }
     else {
       bakeServo.write(OFF_ANGLE);
+      digitalWrite(BAKE_LED, LOW);
     }
     
     // Control the right serco
@@ -82,7 +91,7 @@ String connectAndRead(){
 
   //port 80 is typical of a www page
   if (client.connect(server, 80)) {
-    digitalWrite(LED_PIN, HIGH);
+    digitalWrite(CONNECT_LED, HIGH);
     
     Serial.println("connected");
     client.print("GET ");
@@ -93,7 +102,7 @@ String connectAndRead(){
     return readPage(); //go and read the output
 
   }else{
-    digitalWrite(LED_PIN, LOW);
+    digitalWrite(CONNECT_LED, LOW);
     return "connection failed";
   }
 
