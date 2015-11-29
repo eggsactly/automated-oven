@@ -9,4 +9,5 @@ oven-project-parts.xml is a spreadsheet containing an itemized list of the parts
 app/ contains an AJAX webpage a smartphone shall run to control the oven.
 firmware/ contains code that runs on the Arduino Ethernet. 
 models/ contains OpenSCAD models of the physical oven mounts that are rendered to .stl files and 3D printed.
+schematics/ contains a diagram of the power supply circuitry and servos and how they connect to the Arduino.
 server-code/ contains code that runs on a server that coordinates communication between the smartphone and the Arduino.
