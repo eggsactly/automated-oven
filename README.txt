@@ -7,8 +7,6 @@ http://www.openscad.org/downloads.html
 
 oven-project-parts.xml is a spreadsheet containing an itemized list of the parts needed to create the mount.
 app/ contains an AJAX webpage a smartphone shall run to control the oven.
-datasheets/ contains data sheets of parts used on the project.
 firmware/ contains code that runs on the Arduino Ethernet. 
-manuals/ contains technical references.
 models/ contains OpenSCAD models of the physical oven mounts that are rendered to .stl files and 3D printed.
 server-code/ contains code that runs on a server that coordinates communication between the smartphone and the Arduino.
