@@ -10,7 +10,7 @@
 #define BAKE_LED 8
 
 #define OFF_ANGLE 45
-#define BAKE_ANGLE 120
+#define BAKE_ANGLE 135
 
 ////////////////////////////////////////////////////////////////////////
 //CONFIGURE
