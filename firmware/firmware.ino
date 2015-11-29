@@ -4,10 +4,17 @@
 #include <SPI.h>
 #include <Servo.h> 
 
+#define LEFT_SERVO 5
+#define RIGHT_SERVO 6
+#define LED_PIN 9
+
+#define OFF_ANGLE 45
+#define BAKE_ANGLE 135
+
 ////////////////////////////////////////////////////////////////////////
 //CONFIGURE
 ////////////////////////////////////////////////////////////////////////
-byte server[] = { 98,172,84,203 }; //ip Address of the server you will connect to
+byte server[] = {98, 172, 84, 203}; //ip Address of the server you will connect to (http://thepool.blue) 
 
 //The location to go to on the server
 //make sure to keep HTTP/1.0 at the end, this is telling it what type of file it is
@@ -22,6 +29,7 @@ EthernetClient client;
 
 Servo bakeServo;
 Servo tempServo; 
+unsigned servoAngle; 
 
 char inString[32]; // string for incoming serial data
 int stringPos = 0; // string index counter
@@ -31,11 +39,10 @@ void setup(){
   Ethernet.begin(mac);
   Serial.begin(9600);
   
-  bakeServo.attach(5);
-  tempServo.attach(6); 
+  bakeServo.attach(LEFT_SERVO);
+  tempServo.attach(RIGHT_SERVO); 
+  pinMode(LED_PIN, OUTPUT);
 }
-
-unsigned servoAngle; 
 
 void loop() {
   String pageValue = connectAndRead(); //connect to the server and read the output
@@ -48,17 +55,18 @@ void loop() {
   Serial.print("Temp Value: ");
   Serial.println(pageValue.substring(2).toInt());
 
+  // If we have enough info
   if(pageValue.length() > 2) {
-    if(pageValue.charAt(0) == '1') {
-      bakeServo.write(90);
+    
+    // Control the left servo 
+    if(pageValue.charAt(0) == '2') {
+      bakeServo.write(BAKE_ANGLE);
     }
-    else if(pageValue.charAt(0) == '2') {
-      bakeServo.write(170);
-    }
-    else if(pageValue.charAt(180) == '3') {
-      bakeServo.write(10);
+    else {
+      bakeServo.write(OFF_ANGLE);
     }
     
+    // Control the right serco
     tempServo.write(pageValue.substring(2).toInt());
   }
 
@@ -74,6 +82,8 @@ String connectAndRead(){
 
   //port 80 is typical of a www page
   if (client.connect(server, 80)) {
+    digitalWrite(LED_PIN, HIGH);
+    
     Serial.println("connected");
     client.print("GET ");
     client.println(location);
@@ -83,6 +93,7 @@ String connectAndRead(){
     return readPage(); //go and read the output
 
   }else{
+    digitalWrite(LED_PIN, LOW);
     return "connection failed";
   }
 
@@ -113,12 +124,8 @@ String readPage(){
           client.flush();
           Serial.println("disconnecting.");
           return inString;
-
         }
-
       }
     }
-
   }
-
 }
