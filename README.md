@@ -10,7 +10,8 @@ You will also need to download and install OpenSCAD to render the 3D models:
 http://www.openscad.org/downloads.html
 
 You will need to order the parts listed in oven-project-parts.xml, 3D print the shapes in models and assemble the circuit below. 
-![SVG circuit diagram of the servos hooked to the power regulators and the Arduino](schematics/power-regulator_bb.svg)
+
+![SVG circuit diagram of the servos hooked to the power regulators and the Arduino](schematics/power-regulator_bb.png)
 
 # License
 automated-oven is free software: you can redistribute it and/or modify
