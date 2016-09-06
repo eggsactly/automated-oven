@@ -1,7 +1,7 @@
 # About
 automated-oven contains models and code to implement a mount for a 1980s era Hotpoint electric range to control an oven with a smartphone. 
 
-[![Two servo controlled oven knob placements over a Hotpoint oven](https://img.youtube.com/vi/r6ExVcyXNrE/0.jpg)](https://www.youtube.com/watch?v=r6ExVcyXNrE)
+[![Two servo controlled oven knob placements over a Hotpoint oven](https://img.youtube.com/vi/Nlsh6EjL9IA/0.jpg)](https://www.youtube.com/watch?v=Nlsh6EjL9IA)
 
 # Building
 To compile the code to machine readable form you will need to download and install the Arduino IDE
