@@ -13,6 +13,8 @@ You will need to order the parts listed in oven-project-parts.xml, 3D print the 
 
 ![SVG circuit diagram of the servos hooked to the power regulators and the Arduino](schematics/power-regulator_bb.png)
 
+Lastly, you will need to upload the contents of app/ and server-code/ to a PHP enabled web server and replace the byte array _server_ in firmware.ino with the IP address to your server. 
+
 # License
 automated-oven is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
