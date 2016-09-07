@@ -36,3 +36,9 @@ along with automated-oven.  If not, see <http://www.gnu.org/licenses/>.
 - models/ contains OpenSCAD models of the physical oven mounts that are rendered to .stl files and 3D printed.
 - schematics/ contains a diagram of the power supply circuitry and servos and how they connect to the Arduino.
 - server-code/ contains code that runs on a server that coordinates communication between the smartphone and the Arduino.
+
+# Areas for Improvement
+- The servos were underpowered and unreliable towards their outer reach <45 degrees and >135 degrees, I would like to get better servos with better reliability and more power. 
+- The voltage regulator circuit was liable to overheating. It overheated so much that in a 90 degree shift of the Off/Bake knob it could no longer provide the power to push the knob back to its original state. The regulator should be redesigned. 
+- There should be a way for the Arduino to cut power to the servos and there should be a way to know which direction the servos are pointed in before delivering power. 
+- Encryption needs to be added to the product 
